@@ -1,5 +1,7 @@
 package com.example.kengomaruyama.sainttropez
 
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextMenu
@@ -54,8 +56,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onContextItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
-            R.id.sms -> return true
-            R.id.mail -> return true
+            R.id.sms -> {
+                val number = "999-9999-999"
+                val uri = Uri.parse("sms:$number")
+                var intent = Intent(Intent.ACTION_VIEW)
+                intent.data = uri
+                startActivity(intent)
+                return true
+            }
+            R.id.mail -> {
+                return true
+            }
             R.id.share -> return true
             R.id.browse -> return true
         }
