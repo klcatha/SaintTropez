@@ -82,7 +82,18 @@ class MainActivity : AppCompatActivity() {
                 }
                 return true
             }
-            R.id.share -> return true
+            R.id.share -> {
+                val text: String = "美味しいレストランを紹介します"
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, text)
+                }
+                val chooser = Intent.createChooser(intent, null)
+                if (intent.resolveActivity(packageManager) != null)
+                    startActivity(chooser)
+                return true
+            }
             R.id.browse -> return true
         }
         return super.onContextItemSelected(item)
