@@ -65,6 +65,21 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.mail -> {
+                val email: String = "nobody@example.com"
+                val subject: String = "予約問い合わせ"
+                val text: String = "以下の通り予約を希望します"
+                val uri = Uri.parse("mailto:")
+                val intent = Intent(Intent.ACTION_SENDTO)
+                intent.apply {
+                    data = uri
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+                    putExtra(Intent.EXTRA_SUBJECT, subject)
+                    putExtra(Intent.EXTRA_TEXT, text)
+                }
+                if (intent.resolveActivity(packageManager) != null)
+                {
+                    startActivity(intent)
+                }
                 return true
             }
             R.id.share -> return true
