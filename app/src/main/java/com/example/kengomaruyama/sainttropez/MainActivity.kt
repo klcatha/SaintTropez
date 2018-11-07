@@ -94,7 +94,15 @@ class MainActivity : AppCompatActivity() {
                     startActivity(chooser)
                 return true
             }
-            R.id.browse -> return true
+            R.id.browse ->{
+                val uri: String = "http://WWW.google.co.jp/"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(uri)
+                if (intent.resolveActivity(packageManager) != null){
+                    startActivity(intent)
+                }
+                return true
+            }
         }
         return super.onContextItemSelected(item)
     }
